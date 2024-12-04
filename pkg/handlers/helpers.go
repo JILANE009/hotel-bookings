@@ -1,0 +1,59 @@
+package helpers
+
+import (
+	"fmt"
+	"github.com/JILANE009/hotel-bookings/pkg/config"
+	"github.com/JILANE009/hotel-bookings/pkg/models"
+	"github.com/JILANE009/hotel-bookings/pkg/render"
+	"math/rand"
+	"net/http"
+)
+
+func Hello() {
+	fmt.Println("Hello World")
+}
+
+func RandomNumber(n int) int {
+	value := rand.Intn(n)
+	return value
+}
+
+var Repo *Repository
+
+type Repository struct {
+	App *config.AppConfig
+}
+
+func NewRepository(a *config.AppConfig) *Repository {
+	return &Repository{
+		App: a,
+	}
+}
+
+func NewHandlers(r *Repository) {
+	Repo = r
+}
+
+func (m *Repository) Home(w http.ResponseWriter, req *http.Request) {
+	remoteIP := req.RemoteAddr
+	m.App.Session.Put(req.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "home.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) About(w http.ResponseWriter, req *http.Request) {
+
+	stringMap := make(map[string]string)
+	stringMap["test"] = "Hello World"
+
+	remoteIP := m.App.Session.GetString(req.Context(), "remote_ip")
+	stringMap["remote_ip"] = remoteIP
+
+	render.RenderTemplate(w, "about.page.html", &models.TemplateData{
+		StringMap: stringMap,
+	})
+}
+
+func (m *Repository) Contact(w http.ResponseWriter, req *http.Request) {
+	render.RenderTemplate(w, "contact.page.html", &models.TemplateData{})
+}
