@@ -54,6 +54,6 @@ func (m *Repository) About(w http.ResponseWriter, req *http.Request) {
 	})
 }
 
-func (m *Repository) Contact(w http.ResponseWriter, req *http.Request) {
-	render.RenderTemplate(w, "contact.page.gohtml", &models.TemplateData{})
+func (m *Repository) Reservation(w http.ResponseWriter, req *http.Request) {
+	render.RenderTemplate(w, "reservation.page.gohtml", &models.TemplateData{})
 }
