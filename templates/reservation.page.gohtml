@@ -1,12 +1,49 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
+
+    <div class="container" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh; padding-top: 50px;">
         <div class="row">
             <div class="col">
+                <h1>Make a Reservation</h1>
+                <p><strong>Reservation Details</strong><br></p>
+                <form action="/reservation" method="post" class="form-group">
+                    <input type="hidden" name="crsf_token" value="{{.CSRFToken}}">
+                    <div class="col" style="display: flex; gap: 20px; align-items: center;">
+                        <div>
+                            <label for="checkInDate">Check In Date</label><br>
+                            <input type="date" id="checkInDate" name="checkInDate"><br>
+                        </div>
+                        <div>
+                            <label for="checkOutDate">Check Out Date</label><br>
+                            <input type="date" id="checkOutDate" name="checkOutDate"><br>
+                        </div>
+                    </div>
+                    <label for="roomType" style="margin-top:10px;">Select the room type:</label><br>
+                    <select name="roomType" id="roomType">
+                        <option value="Premium">Premium Deluxe</option>
+                        <option value="regularSeaView">Regular Sea View</option>
+                        <option value="regularCityView">Regular City View</option>
+                    </select><br>
 
+                    <label for="fName" style="margin-top:10px;">First Name:</label><br>
+                    <input type="text" id="fName" name="fName"><br>
 
+                    <label for="lName" style="margin-top:10px;">Last Name:</label><br>
+                    <input type="text" id="lName" name="lName"><br>
+
+                    <label for="number" style="margin-top:10px;">Phone Number:</label><br>
+                    <input type="text" id="number" name="number"><br>
+
+                    <label for="email" style="margin-top:10px;">Email Address:</label><br>
+                    <input type="text" id="email" name="email"><br>
+
+                    <button type="submit" style="margin-top:10px;">Submit</button>
+                </form>
             </div>
         </div>
     </div>
+
+
+
 {{end}}
