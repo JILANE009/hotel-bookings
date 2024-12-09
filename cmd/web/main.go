@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/JILANE009/hotel-bookings/pkg/config"
-	helpers "github.com/JILANE009/hotel-bookings/pkg/handlers"
-	"github.com/JILANE009/hotel-bookings/pkg/render"
+	"github.com/JILANE009/hotel-bookings/internal/config"
+	"github.com/JILANE009/hotel-bookings/internal/handlers"
+	"github.com/JILANE009/hotel-bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"

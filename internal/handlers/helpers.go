@@ -1,10 +1,12 @@
 package helpers
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/JILANE009/hotel-bookings/pkg/config"
-	"github.com/JILANE009/hotel-bookings/pkg/models"
-	"github.com/JILANE009/hotel-bookings/pkg/render"
+	"github.com/JILANE009/hotel-bookings/internal/config"
+	"github.com/JILANE009/hotel-bookings/internal/models"
+	"github.com/JILANE009/hotel-bookings/internal/render"
+	"log"
 	"math/rand"
 	"net/http"
 )
@@ -59,5 +61,32 @@ func (m *Repository) Reservation(w http.ResponseWriter, req *http.Request) {
 }
 
 func (m *Repository) PostReservation(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("Reservation posted")
+	start := req.Form.Get("checkInDate")
+	end := req.Form.Get("checkOutDate")
+	fmt.Println("Reservation dates are:", start, end)
 	w.Write([]byte("Posted a search availability"))
+}
+
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+func (m *Repository) PostReservationJson(w http.ResponseWriter, req *http.Request) {
+	resp := jsonResponse{
+		OK:      true,
+		Message: "Available!",
+	}
+
+	out, err := json.MarshalIndent(resp, "", "    ")
+	if err != nil {
+		log.Println(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
+}
+
+func (m *Repository) Login(w http.ResponseWriter, req *http.Request) {
+	render.RenderTemplate(w, req, "login.page.gohtml", &models.TemplateData{})
 }

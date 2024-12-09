@@ -7,16 +7,14 @@
             <div class="col">
                 <h1>Make a Reservation</h1>
                 <p><strong>Reservation Details</strong><br></p>
-                <form action="/reservation" method="post" class="form-group">
-                    <input type="hidden" name="crsf_token" value="{{.CSRFToken}}">
+                <form action="/reservation" method="post" novalidate class="needs-validation">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <div class="col" style="display: flex; gap: 20px; align-items: center;">
-                        <div>
-                            <label for="checkInDate">Check In Date</label><br>
-                            <input type="date" id="checkInDate" name="checkInDate"><br>
+                        <div class="col">
+                            <input required  type="text" id="checkInDate" name="checkInDate" placeholder="Arrival Date"><br>
                         </div>
-                        <div>
-                            <label for="checkOutDate">Check Out Date</label><br>
-                            <input type="date" id="checkOutDate" name="checkOutDate"><br>
+                        <div class="col">
+                            <input required type="text" id="checkOutDate" name="checkOutDate" placeholder="Check OUt Date"><br>
                         </div>
                     </div>
                     <label for="roomType" style="margin-top:10px;">Select the room type:</label><br>

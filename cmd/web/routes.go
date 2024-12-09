@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/JILANE009/hotel-bookings/pkg/config"
-	helpers "github.com/JILANE009/hotel-bookings/pkg/handlers"
+	"github.com/JILANE009/hotel-bookings/internal/config"
+	"github.com/JILANE009/hotel-bookings/internal/handlers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"net/http"
@@ -17,8 +17,11 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/", helpers.Repo.Home)
 	mux.Get("/about", helpers.Repo.About)
+
 	mux.Get("/reservation", helpers.Repo.Reservation)
 	mux.Post("/reservation", helpers.Repo.PostReservation)
+	mux.Get("/reservation-json", helpers.Repo.PostReservationJson)
+
 	mux.Get("/login", helpers.Repo.Login)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
