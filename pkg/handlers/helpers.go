@@ -38,7 +38,7 @@ func (m *Repository) Home(w http.ResponseWriter, req *http.Request) {
 	remoteIP := req.RemoteAddr
 	m.App.Session.Put(req.Context(), "remote_ip", remoteIP)
 
-	render.RenderTemplate(w, "home.page.gohtml", &models.TemplateData{})
+	render.RenderTemplate(w, req, "home.page.gohtml", &models.TemplateData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, req *http.Request) {
@@ -49,11 +49,15 @@ func (m *Repository) About(w http.ResponseWriter, req *http.Request) {
 	remoteIP := m.App.Session.GetString(req.Context(), "remote_ip")
 	stringMap["remote_ip"] = remoteIP
 
-	render.RenderTemplate(w, "about.page.gohtml", &models.TemplateData{
+	render.RenderTemplate(w, req, "about.page.gohtml", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, req *http.Request) {
-	render.RenderTemplate(w, "reservation.page.gohtml", &models.TemplateData{})
+	render.RenderTemplate(w, req, "reservation.page.gohtml", &models.TemplateData{})
+}
+
+func (m *Repository) PostReservation(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("Posted a search availability"))
 }
