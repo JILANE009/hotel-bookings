@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-const portName = ":4504"
+const portName = "0.0.0.0:4504"
 
 var app config.AppConfig
 var session *scs.SessionManager
